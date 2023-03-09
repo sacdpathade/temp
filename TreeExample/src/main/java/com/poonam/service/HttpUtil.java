@@ -8,6 +8,10 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClients;
 
+/**
+ * Not being used for now.
+ */
+@Deprecated
 public class HttpUtil {
 	public static String executeGet(final String getUrl) {
 
@@ -15,15 +19,6 @@ public class HttpUtil {
 			HttpClient httpclient = HttpClients.createDefault();
 			HttpGet httpGet = new HttpGet(getUrl);
 
-//			if (hMap == null || hMap.size() == 0) {
-//				for (String key : headerMap.keySet()) {
-//					httpGet.addHeader(key, headerMap.get(key));
-//				}
-//			} else {
-//			for (String key : hMap.keySet()) {
-//				httpGet.addHeader(key, hMap.get(key));
-//			}
-//			}
 			// Execute and get the response.
 			HttpResponse response = httpclient.execute(httpGet);
 			HttpEntity entity = response.getEntity();

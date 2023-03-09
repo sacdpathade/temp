@@ -3,17 +3,17 @@ package com.poonam.service;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.jsoup.nodes.Document;
+
 public class ServerResponse {
 
 	SortedSet<String> jarVersions;
 	
-	ServerResponse(String htmlResponse) {
+	ServerResponse(Document doc) {
 		//Update jar versions using html response.
 		this.jarVersions = new TreeSet<>();
-	}
-	
-	public void updateResponseUsingHtmlResponse() {
 		
+		//Add jar versions by using JSoup document
 	}
 
 	public SortedSet<String> getJarVersions() {

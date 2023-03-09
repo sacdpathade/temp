@@ -4,14 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.io.File;
 import java.util.Properties;
 
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
@@ -20,7 +17,7 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
-import com.poonam.service.BackendService;
+import com.poonam.service.UxService;
 
 //https://jhy.io/
 public class ParentTree extends JFrame {
@@ -65,7 +62,7 @@ public class ParentTree extends JFrame {
 
 	public ParentTree() throws Exception {
 		
-		BackendService backendService = new BackendService();
+		UxService uxService = new UxService();
 		
 		appProperties
 				.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("application.properties"));
@@ -96,6 +93,7 @@ public class ParentTree extends JFrame {
 			public void valueChanged(TreeSelectionEvent e) {
 				DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
 				System.out.println("Selected node " + selectedNode.getUserObject().toString());
+				uxService.getPage(selectedNode.getUserObject().toString());
 			}
 		});
 

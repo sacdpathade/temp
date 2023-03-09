@@ -2,13 +2,15 @@ package com.poonam.service;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 public class BackendService {
 	private static final String PROP_SEP = ",";
@@ -47,13 +49,13 @@ public class BackendService {
 		return properties;
 	}
 
-	public ServerResponse getResponseForServer(String serverName) {
-		String url = "";
-		// Build URL using server name
+	public ServerResponse getResponseForServer(String serverName) throws IOException {
+		String url = "https://jhy.io";
+		// TODO: Build URL using serverName
 
-		String response = HttpUtil.executeGet(url);
+		Document doc = Jsoup.connect(url).get();
 
-		return new ServerResponse(response);
+		return new ServerResponse(doc);
 	}
 
 	public SortedMap<String, ServerResponse> getResponseFromMultipleServers(SortedSet<String> serverNameList) {
@@ -61,11 +63,14 @@ public class BackendService {
 		SortedMap<String, ServerResponse> sortedMapResponse = new TreeMap<>();
 
 		for (String serverName : serverNameList) {
+			// TODO: Build URL using serverName
 			String url = "";
-			// Build URL using server name
-			String response = HttpUtil.executeGet(url);
-			sortedMapResponse.put(serverName, new ServerResponse(response));
-
+			try {
+				Document doc = Jsoup.connect(url).get();
+				sortedMapResponse.put(serverName, new ServerResponse(doc));
+			} catch (IOException e) {
+				System.err.println("Failed to get response from " + serverName);
+			}
 		}
 
 		return sortedMapResponse;
@@ -79,5 +84,4 @@ public class BackendService {
 		return serverTypeToName;
 	}
 
-	
 }
