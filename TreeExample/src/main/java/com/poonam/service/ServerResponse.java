@@ -10,6 +10,8 @@ public class ServerResponse {
 	SortedSet<String> jarVersions;
 	
 	ServerResponse(Document doc) {
+		
+		
 		//Update jar versions using html response.
 		this.jarVersions = new TreeSet<>();
 		
