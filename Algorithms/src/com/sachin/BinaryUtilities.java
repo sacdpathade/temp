@@ -20,6 +20,8 @@ public class BinaryUtilities {
         invokeMethod("findNumberOfSetBitsInNumber", 10);
         invokeMethod("findOnlyNonRepeatingElement", 1, 5, 4, 4, 3, 1, 3);
         invokeMethod("findTwoNonRepeatingElement", 1, 5, 4, 4, 3, 1, 8, 3);
+        invokeMethod("checkIfNumberIsPowerOfTwo", 8);
+        invokeMethod("findNonRepeatingNumberWithOtherNumberRepeatingKTimes");
 
     }
 
@@ -187,5 +189,43 @@ public class BinaryUtilities {
         }
 
         return ("First number " + firstNumber + " And Second number " + (firstNumber ^ result));
+    }
+
+    public static String findNonRepeatingNumberWithOtherNumberRepeatingKTimes() {
+        List<Integer> list = Arrays.asList(1, 2, 3, 1, 7, 2, 3, 1, 2, 3, 2, 1, 3);
+        int k = 4;
+        int count = 0;
+        int[] counterList = new int[32];
+        for(int index = 0; index < 32; index++) {
+            counterList[index] = 0;
+        }
+        for(int number : list) {
+            count = 0;
+            while(number > 0) {
+                if((number % 2) != 0) {
+                    counterList[count] = counterList[count] + 1;
+                }
+                number = number >> 1;
+                count++;
+            }
+        }
+
+        int result = 0;
+        for(int index = 31; index >= 0; index--) {
+            result = result << 1;
+            if((counterList[index] % k) > 0) {
+                result = result + 1;
+            }
+        }
+
+        return "Non repeating element is " + result;
+
+    }
+
+    public static String checkIfNumberIsPowerOfTwo(int number) {
+        if((number & (number-1)) == 0) {
+            return ("Number " + number + " is power of 2");
+        } 
+        return ("Number " + number + " is not power of 2");
     }
 }
