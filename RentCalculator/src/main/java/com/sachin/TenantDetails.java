@@ -105,9 +105,6 @@ public class TenantDetails {
 		builder.append("\n\t\t मागील महिन्यातील रिडींग : " + previousMonthReading + "\t\tपाणी मोटर वापर : " + waterElecticUsage);
 		int totalLightUsage = homeLightUsage + waterElecticUsage;
 		int lightCost = totalLightUsage * msebPerUnitCost;
-		if(totalLightUsage > 60) {
-			lightCost = lightCost + (totalLightUsage - 60);
-		}
 		builder.append("\n\t       --------------एकूण लाईट वापर : " + totalLightUsage +"-------------------      ");
 		builder.append("\n\t\t घरभाडे  : " + basicRent + "\t\t\t\tलाईटभाडे : " + lightCost);
 		builder.append("\n\t ==============================================================");
