@@ -86,9 +86,8 @@ public class Solution {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
         int warehouseRows = Integer.parseInt(bufferedReader.readLine().trim());
-        int warehouseColumns = Integer.parseInt(bufferedReader.readLine().trim());
 
-        List<List<Integer>> warehouse = new ArrayList<>();
+        List<List<Integer>> warehouse = new LinkedList<>();
 
         IntStream.range(0, warehouseRows).forEach(i -> {
             try {
