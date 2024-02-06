@@ -50,30 +50,48 @@ class Result {
     // }
 
     public static int countPaths(List<List<Integer>> warehouse, int rowIndex, int colIndex) {
-        //If current node is 0, then no path available from current node.
-        if(warehouse.get(rowIndex).get(colIndex) == 0) {
+        if( rowIndex >= warehouse.size() || colIndex >= warehouse.get(0).size()) {
+            return 0;
+        }
+
+        int value = warehouse.get(rowIndex).get(colIndex);
+        if(value == 0) {
             return 0;
         }
 
         //If last node, then count it as valid path.
-        if((warehouse.size()==rowIndex+1) && (warehouse.get(0).size()==colIndex+1)) {
+        if((warehouse.size()==rowIndex+1) && (warehouse.get(0).size()==colIndex+1) && value == 1) {
             return 1;
         }
 
-        int count = 0;
-
-        //If more rows available, check valid path from below node.
-        if((warehouse.size() > rowIndex+1)) {
-            count += countPaths(warehouse, rowIndex+1, colIndex);
-        }
-
-        //If more rows available, check valid path from below node.
-        if(warehouse.get(0).size() > (colIndex+1)) {
-            count += countPaths(warehouse, rowIndex, colIndex + 1);
-        }        
-        return count;
-        
+        return (countPaths(warehouse, rowIndex + 1, colIndex) + countPaths(warehouse, rowIndex, colIndex + 1));
     }
+
+    // public static int countPaths(List<List<Integer>> warehouse, int rowIndex, int colIndex) {
+    //     //If current node is 0, then no path available from current node.
+    //     if(warehouse.get(rowIndex).get(colIndex) == 0) {
+    //         return 0;
+    //     }
+
+    //     //If last node, then count it as valid path.
+    //     if((warehouse.size()==rowIndex+1) && (warehouse.get(0).size()==colIndex+1)) {
+    //         return 1;
+    //     }
+
+    //     int count = 0;
+
+    //     //If more rows available, check valid path from below node.
+    //     if((warehouse.size() > rowIndex+1)) {
+    //         count += countPaths(warehouse, rowIndex+1, colIndex);
+    //     }
+
+    //     //If more rows available, check valid path from below node.
+    //     if(warehouse.get(0).size() > (colIndex+1)) {
+    //         count += countPaths(warehouse, rowIndex, colIndex + 1);
+    //     }        
+    //     return count;
+        
+    // }
     
     public static int numPathsTest(List<List<Integer>> warehouse) {        
         return countPaths(warehouse, 0 , 0);
